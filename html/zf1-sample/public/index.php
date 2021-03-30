@@ -15,7 +15,13 @@ set_include_path(implode(PATH_SEPARATOR, array(
 )));
 
 /** Zend_Application */
-require_once 'Zend/Application.php';
+if (file_exists(APPLICATION_PATH . '/../vendor/autoload.php')) {
+    include (APPLICATION_PATH . '/../vendor/autoload.php');
+} else {
+    // load Zend_Application from include path
+    require_once 'Zend/Application.php';
+}
+// require_once 'Zend/Application.php';
 
 // Create application, bootstrap, and run
 $application = new Zend_Application(
